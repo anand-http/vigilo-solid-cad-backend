@@ -22,7 +22,7 @@ export const sendMail = async ({ email, subject, message }) => {
     //     from: `Your App <${process.env.MAIL_USER}>`,
     //     to: email,
     //     subject: subject,
-    //     text: message,
+    //     html: message,
     // });
 
     async function mail() {
