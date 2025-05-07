@@ -13,6 +13,15 @@ dotenv.config({ path: './src/config/.env' });
 app.use(express.json());
 
 
+
+const corsOptions = {
+    origin: "*",
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+};
+
+app.use(cors(corsOptions));
+
+
 app.get('/', (req, res) => {
     res.sendFile(`${process.cwd()}/public/index.html`)
 })
