@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import "express-async-errors"
+import cors from 'cors';
 
 //Middleware import
 import pageNotFound from './src/middleware/pageNotFound.js';
