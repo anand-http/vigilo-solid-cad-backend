@@ -24,6 +24,7 @@ app.use(
 );
 
 
+
 app.get('/', (req, res) => {
     res.sendFile(`${process.cwd()}/public/index.html`)
 })
@@ -32,11 +33,13 @@ app.get('/', (req, res) => {
 //Import routes path
 import userRouter from './src/@user_entity/user_routes.js';
 import shiftRouter from './src/@shift_entity/shift_routes.js';
+import orderRouter from './src/@order_entity/order_routes.js';
 import errorMiddleware from './src/middleware/error.js';
 
 //Routes path
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/shift', shiftRouter);
+app.use('/api/v1/order', orderRouter);
 
 
 app.use(pageNotFound);

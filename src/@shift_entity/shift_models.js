@@ -4,27 +4,27 @@ const shiftSchema = new mongoose.Schema(
   {
     guard: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user", // guards are users
+      ref: "user", 
       required: true,
     },
     site: {
-      type: String, // e.g., "123 Main Street, Delhi"
+      type: String,
       required: true,
     },
     startDate: {
-      type: Date, // e.g., 2025-05-05
+      type: Date, 
       required: true,
     },
     endDate: {
-      type: Date, // e.g., 2025-05-15
+      type: Date,
       required: true,
     },
     startTime: {
-      type: Date, // e.g., 9:00 AM
+      type: Date, 
       required: true,
     },
     endTime: {
-      type: Date, // e.g., 6:00 PM
+      type: Date, 
       required: true,
     },
     task: {
@@ -32,7 +32,7 @@ const shiftSchema = new mongoose.Schema(
     },
     assignedBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user", // admins are users too
+      ref: "user",
       required: true,
     },
   },

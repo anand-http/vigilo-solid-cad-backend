@@ -7,13 +7,16 @@ import {
     deleteUser,
     updateUser
 } from './user_controller.js';
+import { upload } from '../middleware/multer.js';
 
 import isAuthenticated, { isAdmin } from '../middleware/isAuthenticated.js';
 
 const router = express.Router();
 
-router.route('/guard/signup').post(singUpForGuard);
-router.route('/client/signup').post(singUpForClient);
+router.route('/guard/signup').post(upload.single('avatar'), singUpForGuard);
+
+router.route('/client/signup').post(upload.single('avatar'), singUpForClient);
+
 router.route('/admin/signup').post(singUpForAdmin);
 router.route('/signin').post(signIn);
 router.route('/send-otp').post(sendOtp);

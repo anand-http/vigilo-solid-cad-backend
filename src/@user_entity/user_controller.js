@@ -7,7 +7,9 @@ import sha256 from 'crypto-js/sha256.js';
 export const singUpForGuard = async (req, res) => {
     const { name, email, mobile, address, password } = req.body;
 
-    if (!name || !email || !mobile || !address || !password) {
+    const avatar = req.file.filename;
+
+    if (!avatar || !name || !email || !mobile || !address || !password) {
         throw new CustomError("Please provide all fields", 400);
     }
     if (password.length < 8) {
@@ -20,6 +22,7 @@ export const singUpForGuard = async (req, res) => {
     }
 
     const user = await userModel.create({
+        avatar,
         name,
         email,
         mobile,
@@ -41,7 +44,9 @@ export const singUpForGuard = async (req, res) => {
 export const singUpForClient = async (req, res) => {
     const { name, email, mobile, address, password } = req.body;
 
-    if (!name || !email || !mobile || !address || !password) {
+    const avatar = req.file.filename;
+
+    if (!avatar || !name || !email || !mobile || !address || !password) {
         throw new CustomError("Please provide all fields", 400);
     }
     if (password.length < 8) {
@@ -54,6 +59,7 @@ export const singUpForClient = async (req, res) => {
     }
 
     const user = await userModel.create({
+        avatar,
         name,
         email,
         mobile,
@@ -69,8 +75,6 @@ export const singUpForClient = async (req, res) => {
         message: "User Created Successfully",
         data: { user, token },
     })
-
-
 }
 
 
@@ -168,7 +172,7 @@ export const sendOtp = async (req, res) => {
     await sendMail({
         email: user.email,
         subject: "Your OTP for password reset",
-        message: OTPMessage({name, otp}),
+        message: OTPMessage({ name, otp }),
     });
 
     res.status(200).json({
@@ -183,13 +187,13 @@ export const sendOtp = async (req, res) => {
 //Verify OTP
 export const verifyOtp = async (req, res) => {
 
-    const { otp,email } = req.body;
+    const { otp, email } = req.body;
 
     if (!otp) {
         throw new CustomError("Please provide OTP", 400);
     }
 
-    const user = await userModel.findOne({email});
+    const user = await userModel.findOne({ email });
 
     if (!user) {
         throw new CustomError("User not found", 404);
@@ -215,7 +219,7 @@ export const verifyOtp = async (req, res) => {
 //Reset Password
 export const resetPassword = async (req, res) => {
 
-    const { newPassword,email } = req.body;
+    const { newPassword, email } = req.body;
 
     if (!newPassword) {
         throw new CustomError("Please provide a new password", 400);
